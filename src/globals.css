@@ -1,0 +1,35 @@
+.ancora{
+    color: black;
+    text-decoration: none;
+}
+
+.center {
+    position: absolute;
+    top: 25%;
+    right: 245px;
+    text-align: center;
+    font-size: 70px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 85%;
+}
+
+body{
+    background-color: #bbece0;
+}
+
+.col{
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+.btn-default, .btn-default:hover {
+    color: #fff;
+    background-color: #212529;
+    border-color: #0e0f11;
+    float: right;
+}
