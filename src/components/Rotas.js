@@ -4,6 +4,7 @@ import {
     Mercados,
     Produtos,
     NovoAlimento,
+    NovoMercado,
     Sobre,
 } from '.'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
@@ -25,6 +26,9 @@ function Rotas() {
                     </Route>
                     <Route path='/novo_alimento'>
                         <NovoAlimento/>
+                    </Route>
+                    <Route path='/novo_mercado'>
+                        <NovoMercado/>
                     </Route>
                     <Route path='/sobre'>
                         <Sobre/>

@@ -15,11 +15,13 @@ footer {
     position: absolute;
     bottom: 0;
     width: 85%;
+    background-color: #a8eedc;
 }
 
 body{
     background-color: #bbece0;
 }
+
 
 .col{
     flex-basis: 0;
@@ -32,4 +34,14 @@ body{
     background-color: #212529;
     border-color: #0e0f11;
     float: right;
+}
+
+.espacobotao{
+    padding-top: 20px;
+    padding-left: 100px;
+}
+
+.centronewalimento{
+    position: absolute;
+    margin: 10px 275px;
 }

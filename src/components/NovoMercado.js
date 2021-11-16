@@ -1,46 +1,47 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory, Link } from "react-router-dom";
 import { Title, TextCenter, BoxCenter } from './Styles';
-import Alimento from '../models/Alimento';
+import Mercado from '../models/Mercado';
 
-function NovoAlimento() {
+function NovoMercado() {
     const history = useHistory();
-    const [alimento, setAlimento] = useState({});
-
+    const [mercados, setMercados] = useState({});
+    
 
     function setNome(nome){
-        setAlimento({...alimento, nome})
+        setMercados({...mercados, nome})
     }
 
-    function setTipo(tipo){
-        setAlimento({...alimento, tipo})
+    function setEstoque(estoque){
+        setMercados({...mercados, estoque})
     }
 
-    function setQuantidade(quantidade){
-        setAlimento({...alimento, quantidade})
+    function setQuantidadeLoja(quantidade_loja){
+        setMercados({...mercados, quantidade_loja})
     }
 
     function setDataEntrada(data_entrada){
-        setAlimento({...alimento, data_entrada})
+        setMercados({...mercados, data_entrada})
     }
 
     function setDataValidade(data_validade){
-        setAlimento({...alimento, data_validade})
+        setMercados({...mercados, data_validade})
     }
 
-    function depoisDeSalvar(){
-        history.push("/produtos");
+    function alertSalvar(){
+        history.push("/mercados");
     }
+
 
     function salvar(){
-        const alimentoModelo = new Alimento(alimento)
-        alimentoModelo.save(depoisDeSalvar)
+        const mercadosModelo = new Mercado(mercados)
+        mercadosModelo.save()
     }
 
     return ( 
         <>                
             <Title>
-                Cadastrar Alimentos
+                Cadastrar Mercados
             </Title>
             <div className="row">
                 <div className="col-lg-6 centronewalimento">
@@ -51,14 +52,14 @@ function NovoAlimento() {
                                     <div className="row">
                                         <div className="col-lg-12">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-name">* Nome do Alimento</label>
+                                                <label class="form-control-label" for="input-name">* Nome do mercado</label>
                                                 <input 
                                                     id="input-name" 
                                                     placeholder="Nome" 
                                                     type="text" 
                                                     class="form-control-alternative form-control" 
                                                     aria-invalid="false" 
-                                                    value={alimento.nome}
+                                                    value={mercados.nome}
                                                     onChange={(e) => {
                                                         e.preventDefault();
                                                         setNome(e.target.value);
@@ -69,31 +70,27 @@ function NovoAlimento() {
                                     </div>
                                     <div className="row">
                                         <div className="col-lg-6">
-                                            <form>    
-                                                <formGroup check>
-                                                    <div class="form-group">
-                                                        <label class="form-control-label" for="input-tipo">Tipo</label>
-                                                        <input 
-                                                            id="input-tipo" 
-                                                            placeholder="Tipo"
-                                                            name="radio1" 
-                                                            type="radio"
-                                                            class="form-control-alternative form-control" 
-                                                            onChange={(e) => {
-                                                                e.preventDefault();
-                                                                setDataEntrada(e.target.value);
-                                                        }}/>
-                                                    </div>
-                                                </formGroup>
-                                            </form>
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-quantidade">Quantidade</label>
+                                                <label class="form-control-label" for="input-tipo">Estoque</label>
+                                                <input 
+                                                    id="input-tipo" 
+                                                    placeholder="Tipo" 
+                                                    type="text"
+                                                    class="form-control-alternative form-control" 
+                                                    value={mercados.estoque} 
+                                                    onChange={(e) => {
+                                                        e.preventDefault();
+                                                        setDataEntrada(e.target.value);
+                                                    }}/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-quantidade">Quantidade disponivel</label>
                                                 <input 
                                                     id="input-quantidade" 
                                                     placeholder="Quantidade" 
                                                     type="text"
                                                     class="form-control-alternative form-control" 
-                                                    value={alimento.quantidade}
+                                                    value={mercados.quantidade_loja}
                                                     onChange={(e) => {
                                                         e.preventDefault();
                                                         setDataValidade(e.target.value);
@@ -110,7 +107,7 @@ function NovoAlimento() {
                                                     placeholder="Data entrada" 
                                                     type="date"
                                                     class="form-control-alternative form-control" 
-                                                    value={alimento.data_entrada}
+                                                    value={mercados.data_entrada}
                                                     onChange={(e) => {
                                                         e.preventDefault();
                                                         setDataEntrada(e.target.value);
@@ -123,7 +120,7 @@ function NovoAlimento() {
                                                     placeholder="Data validade" 
                                                     type="date"
                                                     class="form-control-alternative form-control" 
-                                                    value={alimento.data_validade}
+                                                    value={mercados.data_validade}
                                                     onChange={(e) => {
                                                         e.preventDefault();
                                                         setDataValidade(e.target.value);
@@ -135,7 +132,7 @@ function NovoAlimento() {
                                 <div class="pl-lg-4 pr-lg-4 espacobotao">
                                     <div class="row">
                                         <div class="col">
-                                            <Link className="float-right btn btn-danger" to="/Produtos"> Voltar </Link>
+                                            <Link className="float-right btn btn-danger" to="/Mercados"> Voltar </Link>
                                         </div>
                                         <div class="col">
                                             <button 
@@ -150,9 +147,7 @@ function NovoAlimento() {
                                         </div>
                                     </div>
                                 </div>
-                            </form>
-
-                            
+                            </form>   
                         </div>
                     </div>
                 </div>
@@ -161,4 +156,4 @@ function NovoAlimento() {
      );
 }
 
-export default NovoAlimento;
+export default NovoMercado;

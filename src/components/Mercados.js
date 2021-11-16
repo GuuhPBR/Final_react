@@ -1,10 +1,77 @@
-import React from 'react';
-import { Table, Dropdown, DropdownToggle, DropdownMenu, DropdownItem  } from 'reactstrap';
+import React, {useState, useEffect} from 'react';
+import { Table, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem  } from 'reactstrap';
+import { Link } from "react-router-dom";
+import MercadosAdapter from '../adapters/MercadosAdapter';
 
 
-function Mercado () {
+function Mercados () {
+    const [mercados, setMercados] = useState([]);
+    const mercadosAdapter = new MercadosAdapter()
+
+
+    useEffect(() =>{
+        mercadosAdapter.fetchResources(setMercados);
+    }, [])
+
+    console.log("mercados", mercados);
+
+    function renderMercado(mercado){
+        if(mercado.length < 1) {
+            return null
+        }
+
+        return (
+            <tr>
+                <th scope="row">
+                    {mercado.id}
+                </th>
+                <td>
+                    {mercado.nome}
+                </td>
+                <td>
+                    {mercado.estoque} 
+                </td>
+                <td>
+                    {mercado.quantidade_loja} kg
+                </td>
+                <td>
+                    {mercado.data_entrada}
+                </td>
+                <td>
+                {mercado.data_validade}
+                </td>
+                <td>
+                    <UncontrolledButtonDropdown>
+                        <DropdownToggle caret>
+                            n sei 
+                        </DropdownToggle>
+                        <DropdownMenu>
+                            <DropdownItem header>
+                                Opções
+                            </DropdownItem>
+                            <DropdownItem>
+                                Editar
+                            </DropdownItem>
+                            <DropdownItem>
+                                Deletar
+                            </DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledButtonDropdown>
+                </td> 
+            </tr>
+        )
+    }
+
     return ( 
         <>  
+            <div className="row">
+                <div className="col">
+                    <h1>Lista de Mercados</h1>
+                </div>
+                <div className="col">
+                    <Link className="float-right btn btn-default" to="/novo_mercado"> Nova Loja </Link>
+                </div>
+            </div>    
             <Table
                 dark
                 size=""
@@ -16,10 +83,13 @@ function Mercado () {
                             #
                         </th>
                         <th>
-                            Mercado
+                            Loja
                         </th>
                         <th>
-                            Quantidade de frutas 
+                            Estoque
+                        </th>
+                        <th>
+                            Quantidade Disponivel
                         </th>
                         <th>
                             Data - Entrada
@@ -33,107 +103,14 @@ function Mercado () {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">
-                            1
-                        </th>
-                        <td>
-                            Extra
-                        </td>
-                        <td>
-                            10 kg
-                        </td>
-                        <td>
-                            01/06/2021
-                        </td>
-                        <td>
-                            16/06/2021
-                        </td>
-                        <td>
-                            <Dropdown toggle={function noRefCheck(){}}>
-                                <DropdownToggle caret>
-                                    Dropdown
-                                </DropdownToggle>
-                                <DropdownMenu>
-                                    <DropdownItem header>
-                                    Header
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                    Action
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </Dropdown>
-                        </td>    
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            2
-                        </th>
-                        <td>
-                            Carrefour 
-                        </td>
-                        <td>
-                            30 kg
-                        </td>
-                        <td>
-                            03/04/2021
-                        </td>
-                        <td>
-                            18/04/2021
-                        </td>
-                        <td>
-                            <Dropdown toggle={function noRefCheck(){}}>
-                                <DropdownToggle caret>
-                                    Dropdown
-                                </DropdownToggle>
-                                <DropdownMenu>
-                                    <DropdownItem header>
-                                    Header
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                    Action
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </Dropdown>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            3
-                        </th>
-                        <td>
-                            Pão de Áçucar
-                        </td>
-                        <td>
-                            20 kg
-                        </td>
-                        <td>
-                            15/11/2021
-                        </td>
-                        <td>
-                            30/11/2021
-                        </td>
-                        <td>
-                            <Dropdown toggle={function noRefCheck(){}}>
-                                <DropdownToggle caret>
-                                    Dropdown
-                                </DropdownToggle>
-                                <DropdownMenu>
-                                    <DropdownItem header>
-                                    Header
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                    Action
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </Dropdown>
-                        </td>
-                    </tr>
+                    {mercados.map(mercado => {
+                        return renderMercado(mercado);
+                    })}
                 </tbody>
             </Table>
         </>   
      );
 }
 
-export default Mercado ;
+export default Mercados ;
 

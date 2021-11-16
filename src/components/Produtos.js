@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Table, Dropdown, DropdownToggle, DropdownMenu, DropdownItem  } from 'reactstrap';
+import { Table, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem   } from 'reactstrap';
 import { Link } from "react-router-dom";
 import AlimentosAdapter from '../adapters/AlimentosAdapter';
 
@@ -41,19 +41,22 @@ function Produtos () {
                 {alimento.data_validade}
                 </td>
                 <td>
-                    <Dropdown toggle={function noRefCheck(){}}>
-                        <DropdownToggle caret>
-                            Dropdown
-                        </DropdownToggle>
-                        <DropdownMenu>
-                            <DropdownItem header>
-                            Header
-                            </DropdownItem>
-                            <DropdownItem>
-                            Action
-                            </DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
+                <UncontrolledButtonDropdown>
+                    <DropdownToggle caret>
+                        n sei 
+                    </DropdownToggle>
+                    <DropdownMenu>
+                        <DropdownItem header>
+                            Opções
+                        </DropdownItem>
+                        <DropdownItem>
+                            Editar
+                        </DropdownItem>
+                        <DropdownItem>
+                            Deletar
+                        </DropdownItem>
+                    </DropdownMenu>
+                </UncontrolledButtonDropdown>
                 </td> 
             </tr>
         )
@@ -66,7 +69,7 @@ function Produtos () {
                     <h1>Lista de Produtos</h1>
                 </div>
                 <div className="col">
-                    <Link className="float-right btn btn-default" to="/novo_alimento"> Nova Fruta </Link>
+                    <Link className="float-right btn btn-default" to="/novo_alimento"> Novo alimento </Link>
                 </div>
             </div>    
             <Table
@@ -80,7 +83,7 @@ function Produtos () {
                             #
                         </th>
                         <th>
-                            Fruta
+                            Alimento
                         </th>
                         <th>
                             Tipo
