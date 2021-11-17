@@ -51,6 +51,18 @@ class BaseAdapter {
         })
 
     }
+
+    fetchResource(id, setter, callback=null) {
+        const req = this.get(id);
+        req.then(response => {
+            if(response.status == 200){
+                setter(response.data, callback);
+            }
+        }).catch(error => {
+            console.error(error);
+        })
+
+    }
 } 
 
 export default BaseAdapter

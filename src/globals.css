@@ -12,9 +12,7 @@
 }
 
 footer {
-    position: absolute;
-    bottom: 0;
-    width: 85%;
+    width: 100%;
     background-color: #a8eedc;
 }
 

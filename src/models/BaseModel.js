@@ -23,7 +23,7 @@ class Model {
     }
 
     destroy(callback=null, args=null){
-        const modelAdapter = this.adapre();
+        const modelAdapter = this.adapter();
         const payload = this.payload();
 
         modelAdapter.delete(payload.id).then(resp => {

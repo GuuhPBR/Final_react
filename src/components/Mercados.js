@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Table, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem  } from 'reactstrap';
 import { Link } from "react-router-dom";
+import Mercado from '../models/Mercado';
 import MercadosAdapter from '../adapters/MercadosAdapter';
 
 
@@ -10,10 +11,23 @@ function Mercados () {
 
 
     useEffect(() =>{
-        mercadosAdapter.fetchResources(setMercados);
+        carregaMercados();
     }, [])
 
-    console.log("mercados", mercados);
+    function carregaMercados(){
+        mercadosAdapter.fetchResources(setMercados);
+    }
+
+    function deletarMercado(mercado){
+        if (window.confirm("Deseja mesmo deletar o mercado?")) {
+            new Mercado(mercado).destroy(confirmaMercadoDeletado)
+        }
+    }
+
+    function confirmaMercadoDeletado(mercado){
+        carregaMercados();
+
+    }
 
     function renderMercado(mercado){
         if(mercado.length < 1) {
@@ -52,7 +66,10 @@ function Mercados () {
                             <DropdownItem>
                                 Editar
                             </DropdownItem>
-                            <DropdownItem>
+                            <DropdownItem onClick={(e) => {
+                                e.preventDefault();
+                                deletarMercado(mercado)
+                            }}>
                                 Deletar
                             </DropdownItem>
                         </DropdownMenu>

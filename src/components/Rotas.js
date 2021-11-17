@@ -4,6 +4,7 @@ import {
     Mercados,
     Produtos,
     NovoAlimento,
+    EditarAlimento,
     NovoMercado,
     Sobre,
 } from '.'
@@ -27,9 +28,16 @@ function Rotas() {
                     <Route path='/novo_alimento'>
                         <NovoAlimento/>
                     </Route>
+                    <Route 
+                        path='/editar_alimento/:id'
+                        render={({match}) => {
+                            return <EditarAlimento id={match.params.id} />
+                        }}>
+                    </Route>
                     <Route path='/novo_mercado'>
                         <NovoMercado/>
                     </Route>
+                    
                     <Route path='/sobre'>
                         <Sobre/>
                     </Route>              

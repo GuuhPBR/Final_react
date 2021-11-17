@@ -1,19 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import { Table, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem   } from 'reactstrap';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import AlimentosAdapter from '../adapters/AlimentosAdapter';
 
 
 function Produtos () {
+    const history = useHistory();
     const [alimentos, setAlimentos] = useState([]);
     const alimentosAdapter = new AlimentosAdapter()
-
 
     useEffect(() =>{
         alimentosAdapter.fetchResources(setAlimentos);
     }, [])
-
-    console.log("alimentos", alimentos);
 
     function renderAlimento(alimento){
         if(alimentos.length < 1) {
@@ -43,13 +41,16 @@ function Produtos () {
                 <td>
                 <UncontrolledButtonDropdown>
                     <DropdownToggle caret>
-                        n sei 
+                        Ações
                     </DropdownToggle>
                     <DropdownMenu>
                         <DropdownItem header>
                             Opções
                         </DropdownItem>
-                        <DropdownItem>
+                        <DropdownItem onClick={(e) => {
+                            e.preventDefault();
+                            history.push("/editar_alimento/" + alimento.id);
+                        }}>
                             Editar
                         </DropdownItem>
                         <DropdownItem>

@@ -5,8 +5,8 @@ import './globals.css';
 function App() {
     return (
         <div className="container">        
-            <Rotas/> 
-            <Footer/>
+            <Rotas/>
+            {/* <Footer/> */}
         </div>
      );
 } 

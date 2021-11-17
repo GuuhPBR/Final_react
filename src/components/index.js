@@ -3,6 +3,7 @@ import Mercados from './Mercados';
 import Produtos from './Produtos';
 import Sobre from './Sobre';
 import NovoAlimento from './NovoAlimento';
+import EditarAlimento from './EditarAlimento';
 import NovoMercado from './NovoMercado';
 
 export {
@@ -10,6 +11,7 @@ export {
     Mercados, 
     Produtos,  
     Sobre,
-    NovoAlimento, 
+    NovoAlimento,
+    EditarAlimento,
     NovoMercado,
 }
