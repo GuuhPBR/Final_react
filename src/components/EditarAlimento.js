@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { useHistory, Link, useLocation } from "react-router-dom";
+import { useHistory, Link, useLocation  } from "react-router-dom";
 import { Title, TextCenter, BoxCenter } from './Styles';
 import Alimento from '../models/Alimento';
 import AlimentosAdapter from '../adapters/AlimentosAdapter';
@@ -24,25 +24,13 @@ function EditarAlimento(props) {
         setAlimento({...alimento, tipo})
     }
 
-    function setQuantidade(quantidade){
-        setAlimento({...alimento, quantidade})
-    }
-
-    function setDataEntrada(data_entrada){
-        setAlimento({...alimento, data_entrada})
-    }
-
-    function setDataValidade(data_validade){
-        setAlimento({...alimento, data_validade})
-    }
-
-    function depoisDeSalvar(){
+    function alertSalvar(){
         history.push("/produtos");
     }
 
     function salvar(){
         const alimentoModelo = new Alimento(alimento)
-        alimentoModelo.save(depoisDeSalvar)
+        alimentoModelo.save(alertSalvar)
     }
 
     return ( 
@@ -61,7 +49,7 @@ function EditarAlimento(props) {
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-name">* Nome do Alimento</label>
                                                 <input 
-                                                    id="input-name" 
+                                                    id="input-name-alimento" 
                                                     placeholder="Nome" 
                                                     type="text" 
                                                     class="form-control-alternative form-control" 
@@ -76,69 +64,30 @@ function EditarAlimento(props) {
                                         </div>
                                     </div>
                                     <div className="row">
-                                        <div className="col-lg-6">
-                                            <form>    
-                                                <formGroup check>
-                                                    <div class="form-group">
-                                                        <label class="form-control-label" for="input-tipo">Tipo</label>
-                                                        <input 
-                                                            id="input-tipo" 
-                                                            placeholder="Tipo"
-                                                            name="radio1" 
-                                                            type="radio"
-                                                            class="form-control-alternative form-control" 
-                                                            onChange={(e) => {
-                                                                e.preventDefault();
-                                                                setDataEntrada(e.target.value);
-                                                        }}/>
-                                                    </div>
-                                                </formGroup>
-                                            </form>
+                                        <div className="col-lg-6">    
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-quantidade">Quantidade</label>
-                                                <input 
-                                                    id="input-quantidade" 
-                                                    placeholder="Quantidade" 
-                                                    type="text"
-                                                    class="form-control-alternative form-control" 
-                                                    value={alimento.quantidade}
+                                                <label class="form-control-label" for="input-tipo">Tipo</label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="alimento_tipo" id="in_natura" value="in_natura" checked={alimento.tipo === 'in_natura'} 
                                                     onChange={(e) => {
-                                                        e.preventDefault();
-                                                        setDataValidade(e.target.value);
+                                                        setTipo("in_natura");
                                                     }}/>
+                                                    <label class="form-check-label" for="in_natura">
+                                                        In Natura
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="alimento_tipo" id="processado" value="processado" checked={alimento.tipo === 'processado'} 
+                                                    onChange={(e) => {
+                                                        setTipo("processado");
+                                                    }} />
+                                                    <label class="form-check-label" for="processado">
+                                                        Processado
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-data_entrada">Data de entrada</label>
-                                                <input 
-                                                    id="input-data_entrada" 
-                                                    placeholder="Data entrada" 
-                                                    type="date"
-                                                    class="form-control-alternative form-control" 
-                                                    value={alimento.data_entrada}
-                                                    onChange={(e) => {
-                                                        e.preventDefault();
-                                                        setDataEntrada(e.target.value);
-                                                    }}/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-data_validade">Data de validade</label>
-                                                <input 
-                                                    id="input-data_validade" 
-                                                    placeholder="Data validade" 
-                                                    type="date"
-                                                    class="form-control-alternative form-control" 
-                                                    value={alimento.data_validade}
-                                                    onChange={(e) => {
-                                                        e.preventDefault();
-                                                        setDataValidade(e.target.value);
-                                                    }}/>
-                                            </div>
-                                        </div>
-                                    </div>                               
+                                    </div>                              
                                 </div>
                                 <div class="pl-lg-4 pr-lg-4 espacobotao">
                                     <div class="row">
@@ -158,9 +107,7 @@ function EditarAlimento(props) {
                                         </div>
                                     </div>
                                 </div>
-                            </form>
-
-                            
+                            </form>                           
                         </div>
                     </div>
                 </div>

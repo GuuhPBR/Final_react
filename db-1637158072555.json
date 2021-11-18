@@ -1,0 +1,118 @@
+{
+  "alimentos": [
+    {
+      "nome": "Banana",
+      "data_entrada": "2021-11-01",
+      "data_validade": "2021-11-12",
+      "tipo": "in natura",
+      "quantidade": 12,
+      "id": 2
+    },
+    {
+      "nome": "Laranja",
+      "data_entrada": "2021-11-03",
+      "data_validade": "2021-11-13",
+      "tipo": "in natura",
+      "quantidade": 10,
+      "id": 3
+    },
+    {
+      "nome": "Votorantim",
+      "data_entrada": "2021-11-05",
+      "data_validade": "2021-11-25",
+      "id": 4
+    },
+    {
+      "nome": "Votorantim",
+      "data_entrada": "2021-11-01",
+      "data_validade": "2021-11-02",
+      "id": 5
+    },
+    {
+      "nome": "Abacaxi",
+      "data_entrada": "2021-11-15",
+      "data_validade": "2021-11-16",
+      "id": 6
+    },
+    {
+      "nome": "Banana",
+      "data_entrada": "2021-11-04",
+      "data_validade": "2021-12-04",
+      "id": 7
+    }
+  ],
+  "mercados": [
+    {
+      "nome": "Banana",
+      "data_entrada": "2021-11-11",
+      "data_validade": "2021-11-16",
+      "id": 8
+    },
+    {
+      "nome": "Banana",
+      "data_entrada": "2021-11-11",
+      "data_validade": "2021-11-16",
+      "id": 9
+    },
+    {
+      "nome": "Banana",
+      "data_entrada": "2021-11-11",
+      "data_validade": "2021-11-16",
+      "id": 10
+    },
+    {
+      "nome": "Banana",
+      "data_entrada": "2021-11-11",
+      "data_validade": "2021-11-16",
+      "id": 11
+    },
+    {
+      "nome": "Extra",
+      "data_entrada": "2021-11-15",
+      "data_validade": "2021-11-16",
+      "id": 13
+    },
+    {
+      "nome": "Extra",
+      "data_entrada": "2021-11-15",
+      "data_validade": "2021-11-16",
+      "id": 14
+    },
+    {
+      "nome": "Extra",
+      "data_entrada": "2021-11-15",
+      "data_validade": "2021-11-16",
+      "id": 15
+    },
+    {
+      "nome": "Extra",
+      "data_entrada": "2021-11-15",
+      "data_validade": "2021-11-16",
+      "id": 16
+    },
+    {
+      "nome": "Extra",
+      "data_entrada": "2021-11-15",
+      "data_validade": "2021-11-16",
+      "id": 17
+    },
+    {
+      "nome": "Extra",
+      "data_entrada": "2021-11-15",
+      "data_validade": "2021-11-16",
+      "id": 18
+    },
+    {
+      "nome": "Extra",
+      "data_entrada": "2021-11-15",
+      "data_validade": "2021-11-16",
+      "id": 19
+    },
+    {
+      "nome": "Extra",
+      "data_entrada": "2021-11-15",
+      "data_validade": "2021-11-16",
+      "id": 20
+    }
+  ]
+}

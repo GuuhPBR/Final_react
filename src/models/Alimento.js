@@ -7,15 +7,12 @@ class Alimento extends BaseModel {
         super();
         this.id = attr['id']
         this.nome = attr['nome']
-        this.quantidade = attr['quantidade']
         this.tipo = attr['tipo']
-        this.data_entrada = attr['data_entrada']
-        this.data_validade = attr['data_validade']
     }
 
     payload(){
-        const {id, nome, quantidade, tipo, data_entrada, data_validade} = this
-        return {id, nome, quantidade, tipo, data_entrada, data_validade}
+        const {id, nome, tipo} = this
+        return {id, nome, tipo}
     }
 
     adapter(){

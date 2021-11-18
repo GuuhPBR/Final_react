@@ -1,32 +1,32 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory, Link } from "react-router-dom";
 import { Title, TextCenter, BoxCenter } from './Styles';
-import Mercado from '../models/Mercado';
+import Instituicao from '../models/Instituicao';
 
-function NovoMercado() {
+function NovoInstituicao() {
     const history = useHistory();
-    const [mercados, setMercados] = useState({});
+    const [instituicoes, setinstituicoes] = useState({});
     
 
     function setNome(nome){
-        setMercados({...mercados, nome})
+        setinstituicoes({...instituicoes, nome})
     }
 
 
     function alertSalvar(){
-        history.push("/mercados");
+        history.push("/instituicoes");
     }
 
 
     function salvar(){
-        const mercadosModelo = new Mercado(mercados)
-        mercadosModelo.save(alertSalvar)
+        const instituicoesModelo = new Instituicao(instituicoes)
+        instituicoesModelo.save(alertSalvar)
     }
 
     return ( 
         <>                
             <Title>
-                Cadastrar Mercados
+                Cadastrar Instituição
             </Title>
             <div className="row">
                 <div className="col-lg-6 centronewalimento">
@@ -37,14 +37,14 @@ function NovoMercado() {
                                     <div className="row">
                                         <div className="col-lg-12">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-name">* Nome do mercado</label>
+                                                <label class="form-control-label" for="input-name">* Nome da instituição</label>
                                                 <input 
-                                                    id="input-name-mercado" 
+                                                    id="input-name-instituicao" 
                                                     placeholder="Nome" 
                                                     type="text" 
                                                     class="form-control-alternative form-control" 
                                                     aria-invalid="false" 
-                                                    value={mercados.nome}
+                                                    value={instituicoes.nome}
                                                     onChange={(e) => {
                                                         e.preventDefault();
                                                         setNome(e.target.value);
@@ -57,7 +57,7 @@ function NovoMercado() {
                                 <div class="pl-lg-4 pr-lg-4 espacobotao">
                                     <div class="row">
                                         <div class="col">
-                                            <Link className="float-right btn btn-danger" to="/Mercados"> Voltar </Link>
+                                            <Link className="float-right btn btn-danger" to="/instituicoes"> Voltar </Link>
                                         </div>
                                         <div class="col">
                                             <button 
@@ -81,4 +81,4 @@ function NovoMercado() {
      );
 }
 
-export default NovoMercado;
+export default NovoInstituicao;

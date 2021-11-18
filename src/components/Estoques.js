@@ -1,48 +1,61 @@
 import React, {useState, useEffect} from 'react';
 import { Table, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem  } from 'reactstrap';
 import { Link, useHistory } from "react-router-dom";
-import Mercado from '../models/Mercado';
-import MercadosAdapter from '../adapters/MercadosAdapter';
+import Estoque from '../models/Estoque';
+import EstoquesAdapter from '../adapters/EstoquesAdapter';
 
 
-function Mercados () {
+function Estoques () {
     const history = useHistory();
-    const [mercados, setMercados] = useState([]);
-    const mercadosAdapter = new MercadosAdapter()
+    const [estoques, setEstoques] = useState([]);
+    const estoquesAdapter = new EstoquesAdapter()
 
 
     useEffect(() =>{
-        carregaMercados();
+        carregaEstoques();
     }, [])
 
-    function carregaMercados(){
-        mercadosAdapter.fetchResources(setMercados);
+    function carregaEstoques(){
+        estoquesAdapter.fetchResources(setEstoques);
     }
 
-    function deletarMercado(mercado){
-        if (window.confirm("Deseja mesmo deletar o mercado?")) {
-            new Mercado(mercado).destroy(confirmaMercadoDeletado)
+    function deletarEstoque(estoque){
+        if (window.confirm("Deseja mesmo deletar o estoque?")) {
+            new Estoque(estoque).destroy(confirmaEstoqueDeletado)
         }
     }
 
-    function confirmaMercadoDeletado(mercado){
-        carregaMercados();
-
+    function confirmaEstoqueDeletado(estoque){
+        carregaEstoques();
     }
 
-    function renderMercado(mercado){
-        if(mercado.length < 1) {
+    function renderEstoque(estoque){
+        if(estoque.length < 1) {
             return null
         }
 
         return (
             <tr>
                 <th scope="row">
-                    {mercado.id}
+                    {estoque.id}
                 </th>
+
                 <td>
-                    {mercado.nome}
+                    {estoque.alimento_id}
                 </td>
+                <td>
+                    {estoque.mercado_id}
+                </td>
+                <td>
+                    {estoque.quantidade} Kgs
+                </td>
+                <td>
+                    {estoque.data_entrada}
+                </td>
+                <td>
+                    {estoque.data_validade}
+                </td>
+               
 
                 <td>
                     <UncontrolledButtonDropdown>
@@ -55,13 +68,13 @@ function Mercados () {
                             </DropdownItem>
                             <DropdownItem onClick={(e) => {
                             e.preventDefault();
-                            history.push("/editar_mercado/" + mercado.id);
+                            history.push("/editar_estoque/" + estoque.id);
                             }}>
                                 Editar
                             </DropdownItem>
                             <DropdownItem onClick={(e) => {
                                 e.preventDefault();
-                                deletarMercado(mercado)
+                                deletarEstoque(estoque)
                             }}>
                                 Deletar
                             </DropdownItem>
@@ -76,10 +89,10 @@ function Mercados () {
         <>  
             <div className="row">
                 <div className="col">
-                    <h1>Lista de Mercados</h1>
+                    <h1>Lista de Estoque</h1>
                 </div>
                 <div className="col">
-                    <Link className="float-right btn btn-default" to="/novo_mercado"> Nova Loja </Link>
+                    <Link className="float-right btn btn-default" to="/novo_estoque"> Novo Estoque </Link>
                 </div>
             </div>    
             <Table
@@ -93,7 +106,19 @@ function Mercados () {
                             #
                         </th>
                         <th>
-                            Nome
+                            Alimento
+                        </th>
+                        <th>
+                            Mercado
+                        </th>
+                        <th>
+                            Quantidade
+                        </th>
+                        <th>
+                            Data - Entrada
+                        </th>
+                        <th>
+                            Data - Vencimento
                         </th>
                         <th>
                             
@@ -101,8 +126,8 @@ function Mercados () {
                     </tr>
                 </thead>
                 <tbody>
-                    {mercados.map(mercado => {
-                        return renderMercado(mercado);
+                    {estoques.map(estoque => {
+                        return renderEstoque(estoque);
                     })}
                 </tbody>
             </Table>
@@ -110,5 +135,4 @@ function Mercados () {
      );
 }
 
-export default Mercados ;
-
+export default Estoques;

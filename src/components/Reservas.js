@@ -1,47 +1,47 @@
 import React, {useState, useEffect} from 'react';
 import { Table, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem  } from 'reactstrap';
 import { Link, useHistory } from "react-router-dom";
-import Mercado from '../models/Mercado';
-import MercadosAdapter from '../adapters/MercadosAdapter';
+import Reserva from '../models/Reserva';
+import ReservaAdapter from '../adapters/ReservaAdapter';
 
 
-function Mercados () {
+function Reservas () {
     const history = useHistory();
-    const [mercados, setMercados] = useState([]);
-    const mercadosAdapter = new MercadosAdapter()
+    const [reservas, setReservas] = useState([]);
+    const reservaAdapter = new ReservaAdapter()
 
 
     useEffect(() =>{
-        carregaMercados();
+        carregaReservas();
     }, [])
 
-    function carregaMercados(){
-        mercadosAdapter.fetchResources(setMercados);
+    function carregaReservas(){
+        reservaAdapter.fetchResources(setReservas);
     }
 
-    function deletarMercado(mercado){
-        if (window.confirm("Deseja mesmo deletar o mercado?")) {
-            new Mercado(mercado).destroy(confirmaMercadoDeletado)
+    function deletarReserva(reserva){
+        if (window.confirm("Deseja mesmo deletar a Reserva?")) {
+            new Reservas(reserva).destroy(confirmaReservaDeletado)
         }
     }
 
-    function confirmaMercadoDeletado(mercado){
-        carregaMercados();
+    function confirmaReservaDeletado(reserva){
+        carregaReservas();
 
     }
 
-    function renderMercado(mercado){
-        if(mercado.length < 1) {
+    function renderReserva(reserva){
+        if(reserva.length < 1) {
             return null
         }
 
         return (
             <tr>
                 <th scope="row">
-                    {mercado.id}
+                    {reserva.id}
                 </th>
                 <td>
-                    {mercado.nome}
+                    {reserva.nome}
                 </td>
 
                 <td>
@@ -55,13 +55,13 @@ function Mercados () {
                             </DropdownItem>
                             <DropdownItem onClick={(e) => {
                             e.preventDefault();
-                            history.push("/editar_mercado/" + mercado.id);
+                            history.push("/editar_reserva/" + reserva.id);
                             }}>
                                 Editar
                             </DropdownItem>
                             <DropdownItem onClick={(e) => {
                                 e.preventDefault();
-                                deletarMercado(mercado)
+                                deletarReserva(reserva)
                             }}>
                                 Deletar
                             </DropdownItem>
@@ -76,10 +76,10 @@ function Mercados () {
         <>  
             <div className="row">
                 <div className="col">
-                    <h1>Lista de Mercados</h1>
+                    <h1>Lista de Reserva</h1>
                 </div>
                 <div className="col">
-                    <Link className="float-right btn btn-default" to="/novo_mercado"> Nova Loja </Link>
+                    <Link className="float-right btn btn-default" to="/novo_reserva"> Nova reserva </Link>
                 </div>
             </div>    
             <Table
@@ -101,8 +101,8 @@ function Mercados () {
                     </tr>
                 </thead>
                 <tbody>
-                    {mercados.map(mercado => {
-                        return renderMercado(mercado);
+                    {reservas.map(reserva => {
+                        return renderReserva(reserva);
                     })}
                 </tbody>
             </Table>
@@ -110,5 +110,4 @@ function Mercados () {
      );
 }
 
-export default Mercados ;
-
+export default Reservas;

@@ -1,47 +1,47 @@
 import React, {useState, useEffect} from 'react';
 import { Table, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem  } from 'reactstrap';
 import { Link, useHistory } from "react-router-dom";
-import Mercado from '../models/Mercado';
-import MercadosAdapter from '../adapters/MercadosAdapter';
+import Instituicao from '../models/Instituicao';
+import InstituicoesAdapter from '../adapters/InstituicoesAdapter';
 
 
-function Mercados () {
+function Instituicoes() {
     const history = useHistory();
-    const [mercados, setMercados] = useState([]);
-    const mercadosAdapter = new MercadosAdapter()
+    const [instituicoes, setinstituicoes] = useState([]);
+    const instituicoesAdapter = new InstituicoesAdapter()
 
 
     useEffect(() =>{
-        carregaMercados();
+        carregainstituicoes();
     }, [])
 
-    function carregaMercados(){
-        mercadosAdapter.fetchResources(setMercados);
+    function carregainstituicoes(){
+        instituicoesAdapter.fetchResources(setinstituicoes);
     }
 
-    function deletarMercado(mercado){
-        if (window.confirm("Deseja mesmo deletar o mercado?")) {
-            new Mercado(mercado).destroy(confirmaMercadoDeletado)
+    function deletarInstituicao(instituicao){
+        if (window.confirm("Deseja mesmo deletar a instituição?")) {
+            new Instituicao(instituicao).destroy(confirmaInstituicaoDeletado)
         }
     }
 
-    function confirmaMercadoDeletado(mercado){
-        carregaMercados();
+    function confirmaInstituicaoDeletado(instituicao){
+        carregainstituicoes();
 
     }
 
-    function renderMercado(mercado){
-        if(mercado.length < 1) {
+    function renderinstituicao(instituicao){
+        if(instituicao.length < 1) {
             return null
         }
 
         return (
             <tr>
                 <th scope="row">
-                    {mercado.id}
+                    {instituicao.id}
                 </th>
                 <td>
-                    {mercado.nome}
+                    {instituicao.nome}
                 </td>
 
                 <td>
@@ -55,13 +55,13 @@ function Mercados () {
                             </DropdownItem>
                             <DropdownItem onClick={(e) => {
                             e.preventDefault();
-                            history.push("/editar_mercado/" + mercado.id);
+                            history.push("/editar_instituicao/" + instituicao.id);
                             }}>
                                 Editar
                             </DropdownItem>
                             <DropdownItem onClick={(e) => {
                                 e.preventDefault();
-                                deletarMercado(mercado)
+                                deletarInstituicao(instituicao)
                             }}>
                                 Deletar
                             </DropdownItem>
@@ -76,10 +76,10 @@ function Mercados () {
         <>  
             <div className="row">
                 <div className="col">
-                    <h1>Lista de Mercados</h1>
+                    <h1>Lista de Instituiçãos</h1>
                 </div>
                 <div className="col">
-                    <Link className="float-right btn btn-default" to="/novo_mercado"> Nova Loja </Link>
+                    <Link className="float-right btn btn-default" to="/novo_instituicao"> Nova Instituição </Link>
                 </div>
             </div>    
             <Table
@@ -101,8 +101,8 @@ function Mercados () {
                     </tr>
                 </thead>
                 <tbody>
-                    {mercados.map(mercado => {
-                        return renderMercado(mercado);
+                    {instituicoes.map(instituicao => {
+                        return renderinstituicao(instituicao);
                     })}
                 </tbody>
             </Table>
@@ -110,5 +110,4 @@ function Mercados () {
      );
 }
 
-export default Mercados ;
-
+export default Instituicoes ;

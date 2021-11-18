@@ -1,7 +1,7 @@
 import BaseModel from "./BaseModel";
-import MercadosAdapter from '../adapters/MercadosAdapter';
+import ReservaAdapter from '../adapters/ReservaAdapter';
 
-class Mercado extends BaseModel {
+class Reserva extends BaseModel {
 
     constructor(attr={}){
         super();
@@ -15,8 +15,8 @@ class Mercado extends BaseModel {
     }
 
     adapter(){
-        return new MercadosAdapter();
+        return new ReservaAdapter();
     }
 }
 
-export default Mercado
+export default Reserva

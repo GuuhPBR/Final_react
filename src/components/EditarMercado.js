@@ -1,17 +1,24 @@
 import React, {useState, useEffect} from 'react';
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, useLocation } from "react-router-dom";
 import { Title, TextCenter, BoxCenter } from './Styles';
 import Mercado from '../models/Mercado';
+import MercadosAdapter from '../adapters/MercadosAdapter';
 
-function NovoMercado() {
+function EditarMercados(props) {
+    const location = useLocation();
     const history = useHistory();
     const [mercados, setMercados] = useState({});
-    
+    const mercadosAdapter = new MercadosAdapter();
+
+    useEffect(() =>{
+        if(props.id){
+            mercadosAdapter.fetchResource(props.id, setMercados)
+        }
+    }, [props.id])
 
     function setNome(nome){
         setMercados({...mercados, nome})
     }
-
 
     function alertSalvar(){
         history.push("/mercados");
@@ -52,7 +59,7 @@ function NovoMercado() {
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
-                                    </div>                              
+                                    </div>                           
                                 </div>
                                 <div class="pl-lg-4 pr-lg-4 espacobotao">
                                     <div class="row">
@@ -81,4 +88,4 @@ function NovoMercado() {
      );
 }
 
-export default NovoMercado;
+export default EditarMercados;

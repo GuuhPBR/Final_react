@@ -20,10 +20,19 @@ function Navigation() {
                             <Link className="link_to ancora" to="/">Home</Link>
                         </ItemLista>
                         <ItemLista> 
+                            <Link className="link_to ancora" to="/Instituicoes">Instituições</Link>
+                        </ItemLista>
+                        <ItemLista> 
                             <Link className="link_to ancora" to="/Mercados">Mercados</Link>
                         </ItemLista>
                         <ItemLista> 
                             <Link className="link_to ancora" to="/Produtos">Produtos</Link>
+                        </ItemLista>
+                        <ItemLista> 
+                            <Link className="link_to ancora" to="/Estoques">Estoques</Link>
+                        </ItemLista>
+                        <ItemLista> 
+                            <Link className="link_to ancora" to="/Reservas">Reservas</Link>
                         </ItemLista>
                         <ItemLista> 
                             <Link className="link_to ancora" to="/Sobre">Sobre</Link>

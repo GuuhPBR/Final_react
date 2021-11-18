@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Table, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem   } from 'reactstrap';
 import { Link, useHistory } from "react-router-dom";
+import Alimento from '../models/Alimento';
 import AlimentosAdapter from '../adapters/AlimentosAdapter';
 
 
@@ -10,8 +11,23 @@ function Produtos () {
     const alimentosAdapter = new AlimentosAdapter()
 
     useEffect(() =>{
-        alimentosAdapter.fetchResources(setAlimentos);
+        carregaAlimento();
     }, [])
+
+    function carregaAlimento(){
+        alimentosAdapter.fetchResources(setAlimentos);
+    }
+
+    function deletarProduto(alimento){
+        if (window.confirm("Deseja mesmo deletar o produto?")) {
+            new Alimento(alimento).destroy(confirmaAlimentoDeletado)
+        }
+    }
+
+    function confirmaAlimentoDeletado(){
+        carregaAlimento();
+    }
+    
 
     function renderAlimento(alimento){
         if(alimentos.length < 1) {
@@ -30,15 +46,6 @@ function Produtos () {
                     {alimento.tipo}
                 </td>
                 <td>
-                    {alimento.quantidade} kg
-                </td>
-                <td>
-                    {alimento.data_entrada}
-                </td>
-                <td>
-                {alimento.data_validade}
-                </td>
-                <td>
                 <UncontrolledButtonDropdown>
                     <DropdownToggle caret>
                         Ações
@@ -53,7 +60,10 @@ function Produtos () {
                         }}>
                             Editar
                         </DropdownItem>
-                        <DropdownItem>
+                        <DropdownItem onClick={(e) => {
+                                e.preventDefault();
+                                deletarProduto(alimento)
+                            }}>
                             Deletar
                         </DropdownItem>
                     </DropdownMenu>
@@ -88,15 +98,6 @@ function Produtos () {
                         </th>
                         <th>
                             Tipo
-                        </th>
-                        <th>
-                            Quantidade
-                        </th>
-                        <th>
-                            Data - Entrada
-                        </th>
-                        <th>
-                            Data - Vencimento
                         </th>
                         <th>
                             
