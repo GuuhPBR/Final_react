@@ -7,7 +7,7 @@ class ReservaAdapter extends BaseAdapter {
     }
 
     apiPath(){
-        return "http://localhost:3001/" + 'reserva'
+        return "http://localhost:3001/" + 'reservas'
     }
 }
 

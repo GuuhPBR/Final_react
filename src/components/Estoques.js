@@ -5,16 +5,22 @@ import Estoque from '../models/Estoque';
 import EstoquesAdapter from '../adapters/EstoquesAdapter';
 import AlimentosAdapter from '../adapters/AlimentosAdapter';
 import MercadosAdapter from '../adapters/MercadosAdapter';
+import InstituicoesAdapter from '../adapters/InstituicoesAdapter';
+import ReservaModal from './ReservaModal';
+import Reserva from '../models/Reserva';
 
 
 function Estoques () {
     const history = useHistory();
+    const [reserva, setReserva] = useState(null);
     const [estoques, setEstoques] = useState([]);
+    const [instituicoes, setInstituicoes] = useState([]);
     const [alimentos, setAlimentos] = useState([]);
     const [mercados, setMercados] = useState([]);
     const estoquesAdapter = new EstoquesAdapter()
     const alimentosAdapter = new AlimentosAdapter()
     const mercadosAdapter = new MercadosAdapter()
+    const instituicoesAdapter = new InstituicoesAdapter()
 
     useEffect(() =>{
         carregaEstoques();
@@ -26,6 +32,10 @@ function Estoques () {
 
     useEffect(() =>{
         mercadosAdapter.fetchResources(setMercados);
+    }, [])
+
+    useEffect(() =>{
+        instituicoesAdapter.fetchResources(setInstituicoes);
     }, [])
 
     function carregaEstoques(){
@@ -56,6 +66,54 @@ function Estoques () {
         }
     }
 
+    function cancelaAcao(){
+        setReserva(null)
+    }
+
+    function confirmaReserva(instituicao, estoque){
+        const reservaModel = new Reserva({estoque_id: estoque.id, instituicao_id: instituicao.id})
+        reservaModel.save(() => {
+            alert("reserva criada com sucesso");
+            setReserva(null);
+        });
+    }
+
+    function novaReserva(estoque){
+        setReserva(estoque)
+    }
+
+    function mostraReservaModal(){
+        if(reserva){
+            return <ReservaModal 
+            modalOpen={true}
+            instituicoes={instituicoes}
+            estoque={reserva}
+            cancelaAcao={cancelaAcao}
+            confirmaReserva={confirmaReserva}/>
+        }else{
+            return null
+        }
+        
+    }
+
+    function mostraSituacao(estoque){
+        if(estoque.data_validade){
+            const data_validade = new Date(estoque.data_validade)
+            const hoje = new Date();
+            const data_vencimento = new Date();;
+            data_vencimento.setDate(data_vencimento.getDate() + 6);
+            debugger
+            if(data_validade < hoje){
+                return 'vencido'
+            }else if(data_validade < data_vencimento){
+                return 'perto de vencer'
+            }else{
+                return 'disponivel'
+            }
+        }
+    }
+
+
     function renderEstoque(estoque){
         if(estoque.length < 1) {
             return null
@@ -83,7 +141,7 @@ function Estoques () {
                     {estoque.data_validade}
                 </td>
                 <td>
-                    {}
+                    {mostraSituacao(estoque)}
                 </td>
                 <td>
                     {}
@@ -110,9 +168,13 @@ function Estoques () {
                             }}>
                                 Deletar
                             </DropdownItem>
-                            <DropdownItem>
+                            <DropdownItem onClick={(e) => {
+                                e.preventDefault();
+                                novaReserva(estoque)
+                            }}>
                                 Fazer Reserva
                             </DropdownItem>
+                            {mostraReservaModal()}
                         </DropdownMenu>
                     </UncontrolledButtonDropdown>
                 </td> 

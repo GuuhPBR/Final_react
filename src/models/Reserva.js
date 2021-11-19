@@ -6,12 +6,13 @@ class Reserva extends BaseModel {
     constructor(attr={}){
         super();
         this.id = attr['id']
-        this.nome = attr['nome']
+        this.estoque_id = attr['estoque_id']
+        this.instituicao_id = attr['instituicao_id']
     }
 
     payload(){
-        const {id, nome,} = this
-        return {id, nome, }
+        const {id, estoque_id, instituicao_id} = this
+        return {id, estoque_id, instituicao_id}
     }
 
     adapter(){

@@ -21,7 +21,7 @@ function Reservas () {
 
     function deletarReserva(reserva){
         if (window.confirm("Deseja mesmo deletar a Reserva?")) {
-            new Reservas(reserva).destroy(confirmaReservaDeletado)
+            new Reserva(reserva).destroy(confirmaReservaDeletado)
         }
     }
 
@@ -52,12 +52,6 @@ function Reservas () {
                         <DropdownMenu>
                             <DropdownItem header>
                                 Opções
-                            </DropdownItem>
-                            <DropdownItem onClick={(e) => {
-                            e.preventDefault();
-                            history.push("/editar_reserva/" + reserva.id);
-                            }}>
-                                Editar
                             </DropdownItem>
                             <DropdownItem onClick={(e) => {
                                 e.preventDefault();
