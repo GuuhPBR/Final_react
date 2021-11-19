@@ -1,35 +1,17 @@
 {
   "alimentos": [
     {
-      "nome": "Abacaxi",
-      "quantidade": "2",
+      "nome": "laranja",
       "tipo": "in_natura",
-      "data_entrada": "2021-11-01",
-      "data_validade": "2021-11-03",
-      "id": 1
+      "id": 4
     },
     {
-      "nome": "Banana",
-      "quantidade": "12",
+      "nome": "uva",
       "tipo": "in_natura",
-      "data_entrada": "2021-11-01",
-      "data_validade": "2021-11-17",
-      "id": 2
-    },
-    {
-      "nome": "Morango",
-      "quantidade": "4",
-      "tipo": "in_natura",
-      "data_entrada": "2021-11-01",
-      "data_validade": "2021-11-17",
-      "id": 3
+      "id": 5
     }
   ],
   "mercados": [
-    {
-      "nome": "Extra",
-      "id": 1
-    },
     {
       "nome": "Carrefour",
       "id": 2
@@ -45,16 +27,16 @@
   ],
   "instituicoes": [
     {
-      "nome": "Paroquia Santo Antonio",
-      "id": 2
-    },
-    {
       "nome": "LBV",
       "id": 3
     },
     {
       "nome": "Igreja Nacional",
       "id": 4
+    },
+    {
+      "nome": "Getulio Vargas",
+      "id": 5
     }
   ],
   "estoques": [
@@ -62,9 +44,17 @@
       "quantidade": "12",
       "data_entrada": "2021-11-01",
       "data_validade": "2021-11-17",
-      "alimento_id": "3",
+      "alimento_id": "4",
       "mercado_id": "3",
       "id": 1
+    },
+    {
+      "quantidade": "15",
+      "data_entrada": "2021-11-05",
+      "data_validade": "2021-11-24",
+      "alimento_id": "5",
+      "mercado_id": "3",
+      "id": 2
     }
   ]
 }

@@ -78,9 +78,6 @@ function Reservas () {
                 <div className="col">
                     <h1>Lista de Reserva</h1>
                 </div>
-                <div className="col">
-                    <Link className="float-right btn btn-default" to="/novo_reserva"> Nova reserva </Link>
-                </div>
             </div>    
             <Table
                 dark

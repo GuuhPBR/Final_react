@@ -56,6 +56,13 @@ function EditarEstoques(props) {
         estoquesModelo.save(vaiParaListaDeEstoques)
     }
 
+    function mostraMercadoNome(mercado_id){
+        const mercado = mercados.find(x => `${x.id}` == mercado_id);
+        if(mercado){
+            return mercado.nome;
+        }
+    }
+
     return ( 
         <>                
             <Title>
@@ -74,7 +81,11 @@ function EditarEstoques(props) {
                                                 <select class="form-control" id="estoque_mercado_id" onChange={setMercado}>
                                                     <option></option>
                                                     {mercados.map(mercado => {
-                                                        return <option value={mercado.id}>{mercado.nome}</option>
+                                                        return  (
+                                                                    <option value={mercado.id} selected={estoque.mercado_id == mercado.id}>
+                                                                        {mercado.nome}
+                                                                    </option>
+                                                                )
                                                     })}
                                                 </select>
                                             </div>
@@ -85,7 +96,11 @@ function EditarEstoques(props) {
                                                 <select class="form-control" id="estoque_mercado_id" onChange={setAlimento}>
                                                     <option></option>
                                                     {alimentos.map(alimento => {
-                                                        return <option value={alimento.id}>{alimento.nome}</option>
+                                                        return  (
+                                                                <option value={alimento.id} selected={estoque.alimento_id == alimento.id}>
+                                                                    {alimento.nome}
+                                                                </option>
+                                                        )
                                                     })}
                                                 </select>
                                             </div>

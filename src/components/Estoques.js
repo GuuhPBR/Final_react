@@ -3,16 +3,29 @@ import { Table, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, Dropdo
 import { Link, useHistory } from "react-router-dom";
 import Estoque from '../models/Estoque';
 import EstoquesAdapter from '../adapters/EstoquesAdapter';
+import AlimentosAdapter from '../adapters/AlimentosAdapter';
+import MercadosAdapter from '../adapters/MercadosAdapter';
 
 
 function Estoques () {
     const history = useHistory();
     const [estoques, setEstoques] = useState([]);
+    const [alimentos, setAlimentos] = useState([]);
+    const [mercados, setMercados] = useState([]);
     const estoquesAdapter = new EstoquesAdapter()
-
+    const alimentosAdapter = new AlimentosAdapter()
+    const mercadosAdapter = new MercadosAdapter()
 
     useEffect(() =>{
         carregaEstoques();
+    }, [])
+
+    useEffect(() =>{
+        alimentosAdapter.fetchResources(setAlimentos);
+    }, [])
+
+    useEffect(() =>{
+        mercadosAdapter.fetchResources(setMercados);
     }, [])
 
     function carregaEstoques(){
@@ -25,8 +38,22 @@ function Estoques () {
         }
     }
 
-    function confirmaEstoqueDeletado(estoque){
+    function confirmaEstoqueDeletado(){
         carregaEstoques();
+    }
+
+    function mostraAlimentoNome(alimento_id){
+        const alimento = alimentos.find(x => `${x.id}` == alimento_id);
+        if(alimento){
+            return alimento.nome;
+        }
+    }
+
+    function mostraMercadoNome(mercado_id){
+        const mercado = mercados.find(x => `${x.id}` == mercado_id);
+        if(mercado){
+            return mercado.nome;
+        }
     }
 
     function renderEstoque(estoque){
@@ -41,10 +68,10 @@ function Estoques () {
                 </th>
 
                 <td>
-                    {estoque.alimento_id}
+                    {mostraAlimentoNome(estoque.alimento_id)}
                 </td>
                 <td>
-                    {estoque.mercado_id}
+                    {mostraMercadoNome(estoque.mercado_id)}
                 </td>
                 <td>
                     {estoque.quantidade} Kgs
@@ -55,7 +82,12 @@ function Estoques () {
                 <td>
                     {estoque.data_validade}
                 </td>
-               
+                <td>
+                    {}
+                </td>
+                <td>
+                    {}
+                </td>
 
                 <td>
                     <UncontrolledButtonDropdown>
@@ -77,6 +109,9 @@ function Estoques () {
                                 deletarEstoque(estoque)
                             }}>
                                 Deletar
+                            </DropdownItem>
+                            <DropdownItem>
+                                Fazer Reserva
                             </DropdownItem>
                         </DropdownMenu>
                     </UncontrolledButtonDropdown>
@@ -119,6 +154,12 @@ function Estoques () {
                         </th>
                         <th>
                             Data - Vencimento
+                        </th>
+                        <th>
+                            Situação
+                        </th>
+                        <th>
+                            Reservado
                         </th>
                         <th>
                             
