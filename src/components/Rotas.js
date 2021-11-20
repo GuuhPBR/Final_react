@@ -16,7 +16,6 @@ import {
     EditarReserva,
     EditarInstituicao,
     NovoMercado,
-    Sobre,
 } from '.'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
@@ -88,10 +87,7 @@ function Rotas() {
                         render={({match}) => {
                             return <EditarMercado id={match.params.id} />
                         }}>
-                    </Route>                   
-                    <Route path='/sobre'>
-                        <Sobre/>
-                    </Route>              
+                    </Route>
                 </Switch>
             </Router> 
         </>

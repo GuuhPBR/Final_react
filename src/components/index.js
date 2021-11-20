@@ -4,7 +4,6 @@ import Produtos from './Produtos';
 import Instituicoes from './Instituicoes';
 import Estoques from './Estoques';
 import Reservas from './Reservas';
-import Sobre from './Sobre';
 import NovoMercado from './NovoMercado';
 import NovoReserva from './NovoReserva';
 import NovoEstoque from './NovoEstoque';
@@ -24,7 +23,6 @@ export {
     Instituicoes, 
     Estoques,
     Reservas,
-    Sobre,
     NovoAlimento,
     NovoReserva,
     NovoMercado,

@@ -3,6 +3,7 @@ import { Table, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, Dropdo
 import { Link, useHistory } from "react-router-dom";
 import Estoque from '../models/Estoque';
 import EstoquesAdapter from '../adapters/EstoquesAdapter';
+import ReservaAdapter from '../adapters/ReservaAdapter';
 import AlimentosAdapter from '../adapters/AlimentosAdapter';
 import MercadosAdapter from '../adapters/MercadosAdapter';
 import InstituicoesAdapter from '../adapters/InstituicoesAdapter';
@@ -13,10 +14,12 @@ import Reserva from '../models/Reserva';
 function Estoques () {
     const history = useHistory();
     const [reserva, setReserva] = useState(null);
+    const [reservas, setReservas] = useState([]);
     const [estoques, setEstoques] = useState([]);
     const [instituicoes, setInstituicoes] = useState([]);
     const [alimentos, setAlimentos] = useState([]);
     const [mercados, setMercados] = useState([]);
+    const reservaAdapter = new ReservaAdapter();
     const estoquesAdapter = new EstoquesAdapter()
     const alimentosAdapter = new AlimentosAdapter()
     const mercadosAdapter = new MercadosAdapter()
@@ -24,6 +27,7 @@ function Estoques () {
 
     useEffect(() =>{
         carregaEstoques();
+        carregaReservas();
     }, [])
 
     useEffect(() =>{
@@ -48,6 +52,10 @@ function Estoques () {
         }
     }
 
+    function carregaReservas(){
+        reservaAdapter.fetchResources(setReservas);
+    }
+
     function confirmaEstoqueDeletado(){
         carregaEstoques();
     }
@@ -70,11 +78,16 @@ function Estoques () {
         setReserva(null)
     }
 
+    function recarregaReservas(){
+        reservaAdapter.fetchResources(setReservas, [], carregaEstoques());
+    }
+
     function confirmaReserva(instituicao, estoque){
         const reservaModel = new Reserva({estoque_id: estoque.id, instituicao_id: instituicao.id})
         reservaModel.save(() => {
             alert("reserva criada com sucesso");
             setReserva(null);
+            recarregaReservas();
         });
     }
 
@@ -93,24 +106,60 @@ function Estoques () {
         }else{
             return null
         }
-        
     }
 
-    function mostraSituacao(estoque){
+    function estaReservado(estoque){
+        const resultado = reservas.find(reserva => reserva.estoque_id === estoque.id) || {}
+        return resultado.id ? true : false;
+    }
+
+    function carregaSituacao(estoque){
         if(estoque.data_validade){
             const data_validade = new Date(estoque.data_validade)
             const hoje = new Date();
             const data_vencimento = new Date();;
             data_vencimento.setDate(data_vencimento.getDate() + 6);
-            debugger
             if(data_validade < hoje){
                 return 'vencido'
             }else if(data_validade < data_vencimento){
-                return 'perto de vencer'
+                return 'perto_de_vencer'
             }else{
-                return 'disponivel'
+                return 'indisponivel'
             }
         }
+    }
+
+    function mostraSituacao(situacao){
+        const label = carregaSituacao(situacao);
+        switch (label) {
+            case "vencido":
+                return <span class="badge bg-danger">Vencido</span>
+            case "perto_de_vencer":
+                return <span class="badge bg-success">Perto de vencer</span>
+            case "indisponivel":
+                return <span class="badge bg-primary">Indisponivel</span>
+            default:
+                return <span class="badge bg-default">N/A</span>
+        }
+    }
+
+    function mostrarOpcaoReserva(estoque){
+        const situacao = carregaSituacao(estoque);
+        const reservado = estaReservado(estoque);
+        if(situacao != "perto_de_vencer"){
+            return null;
+        }
+        if(reservado){
+            return null;
+        }
+        return (
+            <DropdownItem onClick={(e) => {
+                e.preventDefault();
+                novaReserva(estoque)
+            }}>
+                Fazer Reserva
+            </DropdownItem>
+        )
     }
 
 
@@ -144,7 +193,7 @@ function Estoques () {
                     {mostraSituacao(estoque)}
                 </td>
                 <td>
-                    {}
+                    {estaReservado(estoque) ? "Sim" : "Não" }
                 </td>
 
                 <td>
@@ -168,12 +217,7 @@ function Estoques () {
                             }}>
                                 Deletar
                             </DropdownItem>
-                            <DropdownItem onClick={(e) => {
-                                e.preventDefault();
-                                novaReserva(estoque)
-                            }}>
-                                Fazer Reserva
-                            </DropdownItem>
+                            {mostrarOpcaoReserva(estoque)}
                             {mostraReservaModal()}
                         </DropdownMenu>
                     </UncontrolledButtonDropdown>

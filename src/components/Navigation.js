@@ -34,9 +34,6 @@ function Navigation() {
                         <ItemLista> 
                             <Link className="link_to ancora" to="/Reservas">Reservas</Link>
                         </ItemLista>
-                        <ItemLista> 
-                            <Link className="link_to ancora" to="/Sobre">Sobre</Link>
-                        </ItemLista>
                     </Lista>
                 </nav>
             </div>        

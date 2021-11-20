@@ -1,8 +1,8 @@
 {
   "alimentos": [
     {
-      "nome": "laranja",
-      "tipo": "in_natura",
+      "nome": "Atum",
+      "tipo": "processado",
       "id": 4
     },
     {
@@ -27,7 +27,7 @@
   ],
   "instituicoes": [
     {
-      "nome": "LBV",
+      "nome": "LBV 1 ",
       "id": 3
     },
     {
@@ -41,7 +41,7 @@
   ],
   "estoques": [
     {
-      "quantidade": "12",
+      "quantidade": "10",
       "data_entrada": "2021-11-01",
       "data_validade": "2021-11-17",
       "alimento_id": "4",
@@ -49,12 +49,27 @@
       "id": 1
     },
     {
-      "quantidade": "15",
-      "data_entrada": "2021-11-05",
-      "data_validade": "2021-11-24",
+      "quantidade": "10",
+      "data_entrada": "2021-11-01",
+      "data_validade": "2021-12-10",
+      "alimento_id": "4",
+      "mercado_id": "4",
+      "id": 3
+    },
+    {
+      "quantidade": "10",
+      "data_entrada": "2021-11-02",
+      "data_validade": "2021-11-23",
       "alimento_id": "5",
       "mercado_id": "3",
-      "id": 2
+      "id": 4
+    }
+  ],
+  "reservas": [
+    {
+      "estoque_id": 4,
+      "instituicao_id": 4,
+      "id": 1
     }
   ]
 }
